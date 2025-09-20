@@ -7,6 +7,14 @@ export CHROMIUM_LANG=${CHROMIUM_LANG:-ja}
 
 echo "Starting Xvfb on display ${DISPLAY} with screen ${SCREEN}"
 
+DISPLAY_NUM="${DISPLAY#:}"
+LOCK_FILE="/tmp/.X${DISPLAY_NUM}-lock"
+
+if [ -f "$LOCK_FILE" ]; then
+    rm "$LOCK_FILE"
+    echo "File $LOCK_FILE deleted"
+fi
+
 # Virtual display
 Xvfb ${DISPLAY} -screen 0 ${SCREEN} -ac -extension GLX -extension RANDR -extension RENDER &
 XVFB_PID=$!
