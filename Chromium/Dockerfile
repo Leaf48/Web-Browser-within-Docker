@@ -14,13 +14,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     xvfb x11vnc fluxbox novnc websockify \
     fonts-noto-cjk \
     chromium \
-    libxss1 libgbm1 libxshmfence1 libcups2 libatk-bridge2.0-0 libatspi2.0-0 \
+    libxss1 libgbm1 libxshmfence1 libcups2 libatk-bridge2.0-0 libatspi2.0-0 socat \
  && sed -i 's/# \(ja_JP.UTF-8\)/\1/' /etc/locale.gen && locale-gen \
  && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -p /tmp/chrome-profile && chmod 777 /tmp/chrome-profile
 
 # script
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
 
 EXPOSE 5900 6080 9222
-CMD ["/start.sh"]
+ENTRYPOINT ["/start.sh"]
