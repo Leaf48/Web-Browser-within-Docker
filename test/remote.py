@@ -1,7 +1,7 @@
 import asyncio
 from playwright.async_api import async_playwright
 
-URL = ""
+URL = "https://google.com"
 
 
 async def main():
