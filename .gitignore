@@ -1,3 +1,4 @@
 temp
 *.png
 remote*.py
+.DS_Store
